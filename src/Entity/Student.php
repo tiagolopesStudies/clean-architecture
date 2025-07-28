@@ -10,8 +10,31 @@ use Tiagolopes\CleanArchitecture\Entity\ValueObject\Phone;
 
 class Student
 {
-    public Cpf $cpf;
-    public string $name;
-    public Email $email;
-    public Phone $phone;
+    /** @var array<Phone> $phones */
+    public array $phones;
+
+    private function __construct(
+        public readonly Cpf $cpf,
+        public readonly string $name,
+        public readonly Email $email,
+    ) {
+        $this->phones = [];
+    }
+
+    public static function createWithCpfNameAndEmail(
+        string $cpf,
+        string $name,
+        string $email
+    ): self {
+        return new self(
+            cpf: Cpf::create($cpf),
+            name: $name,
+            email: Email::create($email)
+        );
+    }
+
+    public function addPhone(string $ddd, string $phone): void
+    {
+        $this->phones[] = Phone::create($ddd, $phone);
+    }
 }

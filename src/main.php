@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+use Tiagolopes\CleanArchitecture\Entity\Student;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Tiagolopes\CleanArchitecture\Builder\StudentBuilder;
-
-$student = new StudentBuilder()
-    ->withCpfAndName('12301234765', 'Tiago')
-    ->withEmail('teste@gmail.com')
-    ->withPhone('11', '999999999')
-    ->build();
+$student = Student::createWithCpfNameAndEmail('12345654376', 'Tiago Lopes', 'teste@gmail.com');
+$student->addPhone('11', '999999999');
 
 echo $student->cpf . PHP_EOL;
 echo $student->name . PHP_EOL;
 echo $student->email . PHP_EOL;
-echo $student->phone . PHP_EOL;
+
+foreach ($student->phones as $index => $phone) {
+    echo 'Phone ' . ($index+1) . ' - ' . $phone . PHP_EOL;
+}
