@@ -2,22 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tiagolopes\CleanArchitecture\Entity\ValueObject;
+namespace Tiagolopes\CleanArchitecture\Domain\Student\ValueObject;
 
 use InvalidArgumentException;
 use Stringable;
 
-class Cpf implements Stringable
+class Email implements Stringable
 {
     private string $value {
         set {
-            $regexCpf = '/^(\d{3})(\d{3})(\d{3})(\d{2})$/';
-            $options  = ['regexp' => $regexCpf];
-
-            if (filter_var($value, FILTER_VALIDATE_REGEXP, compact('options')) === false) {
-                throw new InvalidArgumentException('Invalid CPF number');
+            if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
+                throw new InvalidArgumentException('Invalid email address');
             }
-
             $this->value = $value;
         }
     }

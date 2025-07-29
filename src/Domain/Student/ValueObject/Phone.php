@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tiagolopes\CleanArchitecture\Entity\ValueObject;
+namespace Tiagolopes\CleanArchitecture\Domain\Student\ValueObject;
 
 use InvalidArgumentException;
 use Stringable;

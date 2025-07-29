@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tiagolopes\CleanArchitecture\Entity;
+namespace Tiagolopes\CleanArchitecture\Domain\Student\Entity;
 
-use Tiagolopes\CleanArchitecture\Entity\ValueObject\Cpf;
-use Tiagolopes\CleanArchitecture\Entity\ValueObject\Email;
-use Tiagolopes\CleanArchitecture\Entity\ValueObject\Phone;
+use Tiagolopes\CleanArchitecture\Domain\Student\ValueObject\{Email, Cpf, Phone};
 
 class Student
 {

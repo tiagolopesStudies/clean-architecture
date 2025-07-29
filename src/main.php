@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Tiagolopes\CleanArchitecture\Entity\Student;
+use Tiagolopes\CleanArchitecture\Domain\Student\Entity\Student;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
