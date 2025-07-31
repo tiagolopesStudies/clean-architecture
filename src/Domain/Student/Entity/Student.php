@@ -12,6 +12,7 @@ class Student
     public array $phones;
 
     private function __construct(
+        public readonly ?int $id,
         public readonly Cpf $cpf,
         public readonly string $name,
         public readonly Email $email,
@@ -25,6 +26,7 @@ class Student
         string $email
     ): self {
         return new self(
+            id: null,
             cpf: Cpf::create($cpf),
             name: $name,
             email: Email::create($email)
@@ -34,6 +36,7 @@ class Student
     public static function createFromArray(array $data): self
     {
         return new self(
+            id: $data['id'] ?? null,
             cpf: Cpf::create($data['cpf']),
             name: $data['name'],
             email: Email::create($data['email'])
