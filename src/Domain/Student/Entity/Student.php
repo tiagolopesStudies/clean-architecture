@@ -31,6 +31,15 @@ class Student
         );
     }
 
+    public static function createFromArray(array $data): self
+    {
+        return new self(
+            cpf: Cpf::create($data['cpf']),
+            name: $data['name'],
+            email: Email::create($data['email'])
+        );
+    }
+
     public function addPhone(string $ddd, string $phone): void
     {
         $this->phones[] = Phone::create($ddd, $phone);

@@ -6,7 +6,7 @@ use Tiagolopes\CleanArchitecture\Domain\Student\Entity\Student;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$student = Student::createWithCpfNameAndEmail('12345654376', 'Tiago Lopes', 'teste@gmail.com');
+$student = Student::createWithCpfNameAndEmail('12345654378', 'Tiago Lopes', 'teste@gmail.com');
 $student->addPhone('11', '999999999');
 
 echo $student->cpf . PHP_EOL;

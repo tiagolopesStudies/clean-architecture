@@ -1,0 +1,17 @@
+services:
+  db:
+    container_name: clean-architecture-db
+    image: bitnami/postgresql
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRESQL_DATABASE: clean-architecture
+      POSTGRESQL_USERNAME: docker
+      POSTGRESQL_PASSWORD: docker
+    volumes:
+      - db_data:/bitnami/postgresql
+
+volumes:
+  db_data:
+    driver: local

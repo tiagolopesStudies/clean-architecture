@@ -9,7 +9,7 @@ use Stringable;
 
 class Phone implements Stringable
 {
-    private string $ddd {
+    private(set) string $ddd {
         set {
             if (preg_match('/^\d{2}$/', $value) !== 1) {
                 throw new InvalidArgumentException('Invalid DDD number');
@@ -17,7 +17,7 @@ class Phone implements Stringable
             $this->ddd = $value;
         }
     }
-    private string $number {
+    private(set) string $number {
         set {
             if (preg_match('/^\d{8,9}$/', $value) !== 1) {
                 throw new InvalidArgumentException('Invalid phone number');
