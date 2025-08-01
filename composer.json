@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "php": "8.4",
-      "ext-pdo": "*"
+        "php": "^8.4",
+        "ext-pdo": "*",
+        "symfony/mailer": "^7.3"
     }
 }
