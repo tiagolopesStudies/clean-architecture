@@ -36,7 +36,7 @@ class InMemoryStudentRepository implements StudentRepository
 
     public function getByCpf(string $cpf): Student
     {
-        $studentsArray = array_filter($this->students, fn(Student $student) => $student->cpf === $cpf);
+        $studentsArray = array_filter($this->students, fn(Student $student) => (string) $student->cpf === $cpf);
 
         if (empty($studentsArray)) {
             throw StudentNotFound::fromCpf($cpf);
