@@ -16,7 +16,7 @@ readonly class PdoStudentRepository implements StudentRepository
     {
     }
 
-    public function store(Student $student): void
+    public function create(Student $student): void
     {
         $sql = <<<SQL
             INSERT INTO student (cpf, name, email) VALUES (:CPF, :NAME, :EMAIL);
@@ -33,11 +33,40 @@ readonly class PdoStudentRepository implements StudentRepository
             INSERT INTO phone (student_id, ddd, number) VALUES (:STUDENT_ID, :DDD, :NUMBER);
         SQL;
 
-        $stmt = $this->connection->prepare($sqlInsertPhones);
+        $stmt      = $this->connection->prepare($sqlInsertPhones);
+        $studentId = (int) $this->connection->lastInsertId();
 
         foreach ($student->phones as $phone) {
             $stmt->execute([
-                'STUDENT_ID' => $this->connection->lastInsertId(),
+                'STUDENT_ID' => $studentId,
+                'DDD' => $phone->ddd,
+                'NUMBER' => $phone->number,
+            ]);
+        }
+    }
+
+    public function update(Student $student): void
+    {
+        $sql = <<<SQL
+            UPDATE student SET cpf = :CPF, name = :NAME, email = :EMAIL WHERE id = :ID;
+        SQL;
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute([
+            'ID' => (int) $student->id,
+            'CPF' => $student->cpf,
+            'NAME' => $student->name,
+            'EMAIL' => $student->email,
+        ]);
+
+        $sqlUpdatePhones = <<<SQL
+            UPDATE phone SET ddd = :DDD, number = :NUMBER WHERE student_id = :STUDENT_ID;
+        SQL;
+
+        $stmt = $this->connection->prepare($sqlUpdatePhones);
+        foreach ($student->phones as $phone) {
+            $stmt->execute([
+                'STUDENT_ID' => (int) $student->id,
                 'DDD' => $phone->ddd,
                 'NUMBER' => $phone->number,
             ]);

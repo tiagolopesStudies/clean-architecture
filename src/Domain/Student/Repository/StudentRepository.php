@@ -8,7 +8,9 @@ use Tiagolopes\CleanArchitecture\Domain\Student\Entity\Student;
 
 interface StudentRepository
 {
-    public function store(Student $student): void;
+    public function create(Student $student): void;
+
+    public function update(Student $student): void;
 
     public function getByCpf(string $cpf): Student;
 

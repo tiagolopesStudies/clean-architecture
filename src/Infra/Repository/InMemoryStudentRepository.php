@@ -18,9 +18,20 @@ class InMemoryStudentRepository implements StudentRepository
         $this->students = [];
     }
 
-    public function store(Student $student): void
+    public function create(Student $student): void
     {
         $this->students[] = $student;
+    }
+
+    public function update(Student $student): void
+    {
+        $index = array_find_key($this->students, fn(Student $s) => $s->id === $student->id);
+
+        if (! $index) {
+            throw StudentNotFound::fromId((int) $student->id);
+        }
+
+        $this->students[$index] = $student;
     }
 
     public function getByCpf(string $cpf): Student

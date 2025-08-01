@@ -12,4 +12,9 @@ class StudentNotFound extends DomainException
     {
         return new self("Student with CPF '$cpf' not found");
     }
+
+    public static function fromId(int $id): self
+    {
+        return new self("Student with ID '$id' not found");
+    }
 }
